@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExcellAir Flight Simulator Voucher</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .voucher-container {
+            width: 100%;
+            max-width: 900px;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .voucher-header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .voucher-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .logo-container {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 20px;
+        }
+        
+        .logo-container img {
+            max-width: 450px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .voucher-title {
+            position: relative;
+            z-index: 1;
+            color: white;
+            font-size: 28px;
+            font-weight: 300;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .voucher-body {
+            padding: 50px 40px;
+            background: white;
+        }
+        
+        .experience-title {
+            font-size: 32px;
+            color: #1e3c72;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+        
+        .aircraft-model {
+            color: #2a5298;
+            font-weight: 700;
+        }
+        
+        .value-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .value-label {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .value-amount {
+            font-size: 48px;
+            color: #1e3c72;
+            font-weight: 700;
+        }
+        
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .detail-item {
+            padding: 20px;
+            background: #f8f9fa;
+            border-left: 4px solid #2a5298;
+            border-radius: 8px;
+        }
+        
+        .detail-label {
+            font-size: 14px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        
+        .detail-value {
+            font-size: 18px;
+            color: #1e3c72;
+            font-weight: 700;
+        }
+        
+        .voucher-code {
+            text-align: center;
+            margin: 30px 0;
+            padding: 25px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border-radius: 10px;
+        }
+        
+        .code-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .code-value {
+            font-size: 32px;
+            color: white;
+            font-weight: 700;
+            letter-spacing: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .terms {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .terms-title {
+            font-size: 18px;
+            color: #1e3c72;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .terms-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .terms-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .terms-list li::before {
+            content: '✈';
+            position: absolute;
+            left: 0;
+            color: #2a5298;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 30px 40px;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .contact-info {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        
+        .website {
+            color: #2a5298;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        
+        .website:hover {
+            text-decoration: underline;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .voucher-container {
+                box-shadow: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .voucher-header {
+        padding: 30px 20px;
+    }
+    
+    .logo-container img {
+        max-width: 250px;
+    }
+    
+    .voucher-title {
+        font-size: 20px;
+    }
+    
+    .voucher-body {
+        padding: 30px 20px;
+    }
+    
+    .details-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .experience-title {
+        font-size: 24px;
+    }
+    
+    .value-amount {
+        font-size: 36px;
+    }
+    
+    .value-section {
+        padding: 20px;
+    }
+    
+    .voucher-code {
+        padding: 20px;
+    }
+    
+    .code-value {
+        font-size: 24px;
+        letter-spacing: 2px;
+    }
+    
+    .footer {
+        padding: 20px;
+    }
+}
+
+/* Smartphone styles (480px and below) */
+@media (max-width: 480px) {
+    body {
+        padding: 5px;
+    }
+    
+    .voucher-container {
+        border-radius: 10px;
+    }
+    
+    .voucher-header {
+        padding: 20px 15px;
+    }
+    
+    .logo-container img {
+        max-width: 180px;
+    }
+    
+    .voucher-title {
+        font-size: 16px;
+        letter-spacing: 0.5px;
+    }
+    
+    .voucher-body {
+        padding: 20px 15px;
+    }
+    
+    .experience-title {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .value-section {
+        padding: 15px;
+        margin: 20px 0;
+    }
+    
+    .value-label {
+        font-size: 14px;
+    }
+    
+    .value-amount {
+        font-size: 32px;
+    }
+    
+    .detail-item {
+        padding: 15px;
+    }
+    
+    .detail-label {
+        font-size: 12px;
+    }
+    
+    .detail-value {
+        font-size: 16px;
+    }
+    
+    .voucher-code {
+        padding: 15px;
+        margin: 20px 0;
+    }
+    
+    .code-label {
+        font-size: 12px;
+    }
+    
+    .code-value {
+        font-size: 18px;
+        letter-spacing: 1px;
+    }
+    
+    .terms {
+        margin-top: 30px;
+        padding-top: 20px;
+    }
+    
+    .terms-title {
+        font-size: 16px;
+    }
+    
+    .terms-list li {
+        font-size: 12px;
+        padding: 6px 0;
+        padding-left: 20px;
+    }
+    
+    .footer {
+        padding: 15px;
+    }
+    
+    .contact-info {
+        font-size: 11px;
+        line-height: 1.6;
+    }
+    
+    .website {
+        font-size: 13px;
+    }
+}
+
+/* Very small phones (360px and below) */
+@media (max-width: 360px) {
+    .logo-container img {
+        max-width: 150px;
+    }
+    
+    .voucher-title {
+        font-size: 14px;
+    }
+    
+    .experience-title {
+        font-size: 18px;
+    }
+    
+    .value-amount {
+        font-size: 28px;
+    }
+    
+    .code-value {
+        font-size: 16px;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="voucher-container">
+        <div class="voucher-header">
+            <div class="logo-container">
+                <img src="https://github.com/attytaborda-dot/excellair-voucher/blob/main/ExcellAir%20logo%20-%202025%20-%20White.png?raw=true" alt="ExcellAir Logo">
+            </div>
+            <div class="voucher-title">FLIGHT EXPERIENCE VOUCHER</div>
+        </div>
+        
+        <div class="voucher-body">
+            <h1 class="experience-title">
+                1 Hour Flight Experience<br>
+                <span class="aircraft-model">A320 NEO Flight Simulator</span>
+            </h1>
+            
+            <div class="value-section">
+                <div class="value-label">Voucher Value</div>
+                <div class="value-amount">CHF 220.—</div>
+            </div>
+            
+            <div class="details-grid">
+                <div class="detail-item">
+                    <div class="detail-label">Duration</div>
+                    <div class="detail-value">1 Hour Session</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Simulator Type</div>
+                    <div class="detail-value">A320 NEO</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Valid Until</div>
+                    <div class="detail-value">1 Year from Issue Date</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Issue Date</div>
+                    <div class="detail-value">Upon Showroom Opening</div>
+                </div>
+            </div>
+            
+            <div class="voucher-code">
+                <div class="code-label">Voucher Code</div>
+                <div class="code-value">EXCL-XXXX-XXXX</div>
+            </div>
+            
+            <div class="terms">
+                <h3 class="terms-title">Terms & Conditions</h3>
+                <ul class="terms-list">
+                    <li>This voucher is valid for 1 year from the date of ExcellAir's new showroom opening</li>
+                    <li>Booking must be made in advance by contacting ExcellAir directly</li>
+                    <li>Experience includes a 1-hour session on the A320 NEO flight simulator</li>
+                    <li>This voucher is non-refundable and cannot be exchanged for cash</li>
+                    <li>Voucher can be transferred to another person as a gift</li>
+                    <li>Minimum age requirement may apply - please check with ExcellAir</li>
+                    <li>Sessions are subject to availability</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="contact-info">
+                ExcellAir | Rue de Lausanne 7, 1020 Renens, Switzerland<br>
+                Phone: +41 76 840 0787 | Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c8aba7a6bca9abbc88adb0abada4a4a9a1bae6aba0">[email&#160;protected]</a>
+            </div>
+    
